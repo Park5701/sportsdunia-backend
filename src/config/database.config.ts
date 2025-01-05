@@ -5,13 +5,12 @@ dotenv.config();
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: process.env.DATABASE_HOST,    // Use localhost for local development
+  host: process.env.DATABASE_HOST,
   port: parseInt(process.env.DATABASE_PORT, 10),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [__dirname + '/../entities/*.entity{.ts,.js}'],
-  synchronize: true,                  // Auto-sync schema in development
+  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
+  synchronize: true,
   autoLoadEntities: true,
-  ssl: false,                         // ❌ Disable SSL for local database
 };
