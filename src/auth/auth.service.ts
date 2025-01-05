@@ -12,27 +12,41 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findByUsername(username);
+    
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
-    return user;
+
+    // Return user data excluding password
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 
-  async login(username: string, password: string) {
-    const user = await this.validateUser(username, password);
+  async login(user: any) {  // ✅ Accept full user object instead of username & password
     const payload = { username: user.username, sub: user.id };
-    return { access_token: this.jwtService.sign(payload) };
+    
+    return {
+      access_token: this.jwtService.sign(payload),
+      user, // ✅ Return user details without password
+    };
   }
 
-  async signup(username: string, password: string) {
-    const existingUser = await this.usersService.findByUsername(username);
+  async signup(userData: { username: string; password: string }) {
+    const existingUser = await this.usersService.findByUsername(userData.username);
+    
     if (existingUser) {
       throw new ConflictException('Username already exists');
     }
-    return this.usersService.createUser(username, password);
+
+    // Hash password before storing
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    
+    return this.usersService.createUser(userData.username, hashedPassword);
   }
 }

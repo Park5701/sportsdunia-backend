@@ -10,7 +10,12 @@ export const databaseConfig: TypeOrmModuleOptions = {
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
-  synchronize: true,
+  entities: [__dirname + '/../entities/*.entity{.ts,.js}'],
+  synchronize: true, 
   autoLoadEntities: true,
+  retryAttempts: 3,
+  retryDelay: 3000,
+  ssl: process.env.DATABASE_HOST.includes('render.com') 
+    ? { rejectUnauthorized: false }  // Enable SSL for Render
+    : undefined, // Remove SSL option for local PostgreSQL
 };
