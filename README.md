@@ -33,6 +33,8 @@ Before starting, ensure you have:
 
 ---
 
+http://localhost:3000
+
 ### **2️⃣ Clone the Repository**
 ```bash
 git clone https://github.com/YOUR_GITHUB_USERNAME/sportsdunia-backend.git
@@ -43,6 +45,8 @@ To explore the API endpoints, open:
 
 ```bash
 http://localhost:3000/api/docs
+
+
 
 👥 Contributors
 Parikshit Tomar (Developer)
