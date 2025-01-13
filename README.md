@@ -37,7 +37,7 @@ http://localhost:3000
 
 ### **2️⃣ Clone the Repository**
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/sportsdunia-backend.git
+git clone https://github.com/Park5701/sportsdunia-backend.git
 cd sportsdunia-backend
 
 **API Documentation (Swagger)**:-
