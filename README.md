@@ -32,8 +32,8 @@ Before starting, ensure you have:
 - **PostgreSQL** (Installed & Running) ➜ [Download PostgreSQL](https://www.postgresql.org/download/)
 
 ---
-
-http://localhost:3000
+**Deployed web service:-**
+[http://localhost:3000](https://sportsdunia-backend.onrender.com)
 
 ### **2️⃣ Clone the Repository**
 ```bash
